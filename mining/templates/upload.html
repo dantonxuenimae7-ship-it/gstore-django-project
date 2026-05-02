@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Grocery Analytics ETL Upload</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial;
+            background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+            color: white;
+        }
+
+        .container {
+            width: 45%;
+            margin: 80px auto;
+            background: rgba(255,255,255,0.08);
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(12px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+        }
+
+        h1 {
+            margin-bottom: 5px;
+        }
+
+        p {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .upload-box {
+            margin-top: 25px;
+            padding: 30px;
+            border: 2px dashed rgba(255,255,255,0.4);
+            border-radius: 10px;
+        }
+
+        input[type="file"] {
+            margin-top: 15px;
+            color: white;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            background: #00d4ff;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #00aacc;
+        }
+
+        .status {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #00ff99;
+        }
+
+        .icon {
+            font-size: 50px;
+        }
+
+        .hint {
+            font-size: 12px;
+            opacity: 0.7;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="icon">📦</div>
+
+    <h1>Grocery ETL Upload System</h1>
+    <p>Upload Excel file to load data into Data Warehouse</p>
+
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="upload-box">
+            <p>Drag & Drop or Select Excel File</p>
+            <input type="file" name="excel_file" required>
+
+            <div class="hint">
+                Required columns: transaction_id, date, customer_name, product_name, category, price, quantity, payment_method
+            </div>
+        </div>
+
+        <button type="submit">Run ETL Process</button>
+    </form>
+
+    {% if message %}
+        <div class="status">
+            {{ message }}
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html> 
