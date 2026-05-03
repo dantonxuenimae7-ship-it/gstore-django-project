@@ -176,6 +176,7 @@ def generate_excel(request):
 # PRODUCT CONSUMPTION ANALYSIS
 # =========================
 def product_consumption_analysis(request):
+    return render(request, 'analysis.html')
 
     data = FactSales.objects.all().values(
         "date",
